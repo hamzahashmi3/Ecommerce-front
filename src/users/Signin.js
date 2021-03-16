@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
-import { Redirect } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 import Layout from '../Core/Layout';
 import { signin, authenticate, isAuthenticated } from '../Auth/Index';
 
 const Signin = () => {
     const [values, setValues] = useState({
-        email: 'test@gmail.com',
-        password: 'hashmi.007',
+        email: '',
+        password: '',
         error: '',
         loading: false,
         redirectToRefferer: false
@@ -39,22 +39,29 @@ const Signin = () => {
         });
     };
 
-    const signUpForm = () => (
-        <form>
-
-            <div className="form-group">
-                <label className="text-muted">Email</label>
-                <input onChange={handleChange('email')} type="email" className="form-control" value={email} />
-            </div>
-
-            <div className="form-group">
-                <label className="text-muted">Password</label>
-                <input onChange={handleChange('password')} type="password" className="form-control" value={password} />
-            </div>
-            <button onClick={clickSubmit} className="btn btn-primary">
-                Submit
-            </button>
-        </form>
+    const signInForm = () => (
+            <center>
+                <div classNameName="container">
+                <div classNameName="row">
+                    <div className="col-md-4 my-4 p-4 rounded"  style={{background:"#eee"}}>
+                        <form className="mr-auto">
+                            <div><h3> Log In </h3> <hr /> </div>
+                            <div className="form-group">
+                                <label className="float-left">Email</label>
+                                <input type="email" className="form-control" name="email" onChange={handleChange('email')} placeholder="Enter email"  value={email}  />
+                                <small className="form-text text-muted pull-left">We'll never share your email with anyone else.</small> <br />
+                            </div>
+                            <div className="form-group">
+                                <label className="float-left">Password</label>
+                                <input type="password" className="form-control" placeholder="Password" name="password" onChange={handleChange('password')} value={password} />
+                            </div>
+                            <p className="py-1">Need An Account? <Link to="/signup" className="text-primary"> Register here </Link></p>
+                            <button onClick={clickSubmit} className="btn btn-primary rounded-0" style={{background: "#7fad39", fontWeight:"bolder", border:"none"}}> Submit </button>
+                        </form>
+                    </div>
+                </div>
+            </div> <br />
+            </center>
     );
 
     const showError = () => (
@@ -83,14 +90,10 @@ const Signin = () => {
     };
 
     return (
-        <Layout
-            title="Signin"
-            description="Signin to Node React E-commerce App"
-            className="container col-md-8 offset-md-2" >
-
+        <Layout>
             {showLoading()}
             {showError()}
-            {signUpForm()}
+            {signInForm()}
             {redirectUser()}
         </Layout>
     );

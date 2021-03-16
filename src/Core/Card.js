@@ -21,7 +21,7 @@ const Card = ({
     return (
       showViewProductButton && (
         <Link to={`/product/${product._id}`} className="mr-2">
-          <button className="btn btn-outline-primary mt-2 mb-2 card-btn-1">View Product</button>
+          <li><a><i class="fa fa-image" style={{color:"black"}}></i></a></li>
         </Link>
       )
     );
@@ -40,9 +40,7 @@ const Card = ({
   const showAddToCartBtn = showAddToCartButton => {
     return (
       showAddToCartButton && (
-        <button onClick={addToCart} className="btn btn-outline-warning mt-2 mb-2 card-btn-1  ">
-          Add to cart
-        </button>
+        <li onClick={addToCart}><a><i class="fa fa-shopping-cart"></i></a></li>
       )
     );
   };
@@ -81,20 +79,38 @@ const Card = ({
   const showRemoveButton = showRemoveProductButton => {
     return (
       showRemoveProductButton && (
-        <button
-          onClick={() => {
-            removeItem(product._id);
-            setRun(!run); // run useEffect in parent Cart
-          }}
-          className="btn btn-outline-danger mt-2 mb-2"
-        >
-          Remove Product
-        </button>
+        <li><a  onClick={() => {
+          removeItem(product._id);
+          setRun(!run); // run useEffect in parent Cart
+        }}><i class="fa fa-remove" style={{color:"black"}}></i></a></li>
       )
     );
   };
   return (
-    <div className="card ">
+
+    // <div class="col-lg-3 col-md-4 col-sm-6">
+        <div class="featured__item">
+            <div class="featured__item__pic set-bg" data-setbg="">
+              {shouldRedirect(redirect)}
+              <ShowImage item={product} url="product" />
+                <ul class="featured__item__pic__hover">
+                    <li><a><i class="fa fa-heart"></i></a></li>
+                    {showViewButton(showViewProductButton)}
+                    {showAddToCartBtn(showAddToCartButton)}
+                    {showRemoveButton(showRemoveProductButton)}
+                    {showCartUpdateOptions(cartUpdate)}
+                </ul>
+            </div>
+            <span>{showStock(product.quantity)}</span>
+            <span>
+              <div class="featured__item__text">
+                  <h6><a>{product.name}</a></h6>
+                  <h5>$ {product.price}</h5>
+              </div>
+            </span>
+        {/* </div> */}
+    {/* ------------------------------------------------------------------- */}
+    {/* <div className="card ">
       <div className="card-header card-header-1 ">{product.name}</div>
       <div className="card-body">
         {shouldRedirect(redirect)}
@@ -114,6 +130,7 @@ const Card = ({
 
         {showCartUpdateOptions(cartUpdate)}
       </div>
+    </div> */}
     </div>
   );
 };

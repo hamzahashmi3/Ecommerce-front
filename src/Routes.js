@@ -11,6 +11,7 @@ import AddCategory from './Admin/AddCategory';
 import AddProduct from './Admin/AddProduct';
 import Shop from './Core/Shop';
 import Product from './Core/Product';
+import Contact from './Core/Components/Contactus';
 import Cart from './Core/Cart'
 import Orders from './Admin/Orders';
 import Profile from './users/Profile';
@@ -20,11 +21,13 @@ import UpdateCategory from './Admin/UpdateCategory';
 
 function Routes() {
     return (
+        <React.Fragment>
             <Switch>
                 <Route path="/" exact component={Home} />
                 <Route path="/signup" exact component={Signup} />
                 <Route path="/signin" exact component={Signin} />
                 <Route path="/shop" exact component={Shop} />
+                <Route path="/contact" exact component={Contact} />
                 <Route path="/product/:productId" exact component={Product} />
                 <Route path="/cart" exact component={Cart} />
                 <PrivateRoute path="/user/dashboard" exact component={Dashboard} />
@@ -37,6 +40,7 @@ function Routes() {
                 <AdminRoute path="/admin/product/update/:productId" exact component={UpdateProduct} />
                 <AdminRoute path="/admin/category/update/:categoryId" exact component={UpdateCategory} />
             </Switch>
+        </React.Fragment>
     )
 }
 

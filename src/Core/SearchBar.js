@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { getCategories, list } from "./ApiCore";
+import {Link} from 'react-router-dom';
 import Card from "./Card";
 
-const Search = () => {
+const Search = ({Categories, handleFilters}) => {
     const [data, setData] = useState({
         categories: [],
         category: "",
@@ -10,8 +11,26 @@ const Search = () => {
         results: [],
         searched: false
     });
+    const [checked, setCheked] = useState([]);
 
     const { categories, category, search, results, searched } = data;
+
+
+    const handleToggle = c => () => {
+        // return the first index or -1
+        const currentCategoryId = checked.indexOf(c);
+        const newCheckedCategoryId = [...checked];
+        // if currently checked was not already in checked state > push
+        // else pull/take off
+        if (currentCategoryId === -1) {
+            newCheckedCategoryId.push(c);
+        } else {
+            newCheckedCategoryId.splice(currentCategoryId, 1);
+        }
+        // console.log(newCheckedCategoryId);
+        setCheked(newCheckedCategoryId);
+        handleFilters(newCheckedCategoryId);
+    };
 
     const loadCategories = () => {
         getCategories().then(data => {
@@ -78,48 +97,53 @@ const Search = () => {
         );
     };
 
-    const searchForm = () => (
-        <form onSubmit={searchSubmit}>
-            <span className="input-group-text">
-                <div className="input-group input-group-lg">
-                    <div className="input-group-prepend">
-                        <select
-                            className="btn mr-2"
-                            onChange={handleChange("category")}
-                        >
-                            <option value="All">All</option>
-                            {categories.map((c, i) => (
-                                <option key={i} value={c._id}>
-                                    {c.name}
-                                </option>
-                            ))}
-                        </select>
-                    </div>
+    
 
-                    <input
-                        type="search"
-                        className="form-control"
-                        onChange={handleChange("search")}
-                        placeholder="Search by name"
-                    />
+
+    const searchForm = () => (
+        <section>
+        <div className="container">
+            <div className="row">
+                
+                <div className="col-lg-12">
+                    <div className="hero__search">
+                        <div className="hero__search__forms">
+                            <form onSubmit={searchSubmit}>
+                                <select className="hero__search__categories" onChange={handleChange("category")}>
+                                    <option value="All">All Categories</option>
+                                    {categories.map((c, i) => (
+                                        <option key={i} value={c._id}>
+                                            {c.name}
+                                        </option>
+                                    ))}
+                                </select>
+                                <input type="search" placeholder="What do yo u need?" onChange={handleChange("search")} placeholder="What do yo u need?"/>
+                                <button type="submit" className="site-btn">SEARCH</button>
+                            </form>
+                       </div>
+                        <div className="hero__search__phone">
+                            <div className="hero__search__phone__icon">
+                                <i className="fa fa-phone"></i>
+                            </div>
+                            <div className="hero__search__phone__text">
+                                <h5>+92301 7111141</h5>
+                                <span>support 24/7 time</span>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <div
-                    className="btn input-group-append"
-                    style={{ border: "none" }}
-                >
-                    <button className="input-group-text">Search</button>
-                </div>
-            </span>
-        </form>
+            </div>
+        </div>
+    </section>
     );
 
     return (
-        <div className="row">
+        <div>
             {/* {JSON.stringify(categories)} */}
-            <div className="container mb-3">{searchForm()}</div>
-            <div className="container-fluid mb-3">
+            <div>{searchForm()}</div>
+            {/* <div className="container-fluid mb-3"> */}
                 {searchedProducts(results)}
-            </div>
+            {/* </div> */}
         </div>
     );
 };
