@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import Layout from './Layout';
 import { getProducts, getCategories, getFilteredProducts } from './ApiCore';
+import ShowImage from './ShowImage';
 import Card from './Card';
 import Checkbox from "./Checkbox";
 import RadioBox from "./RadioBox";
 import { prices } from "./FixedPrices";
+import SearchBar from "./SearchBar";
 
 const Shop = () => {
     const [myFilters, setMyFilters] = useState({
@@ -16,6 +18,17 @@ const Shop = () => {
     const [skip, setSkip] = useState(0);
     const [size, setSize] = useState(0);
     const [filteredResults, setFilteredResults] = useState([]);
+    const [productsByArrival, setProductsByArrival] = useState([]);
+    const [data, setData] = useState({
+        categories: [],
+        category: "",
+        search: "",
+        results: [],
+        searched: false
+    });
+    const [checked, setCheked] = useState([]);
+
+    const { Categories, category, search, results, searched } = data;
 
     const init = () => {
         getCategories().then(data => {
@@ -25,6 +38,16 @@ const Shop = () => {
             } else {
                 console.log(data)
                 setCategories(data);
+            }
+        });
+    };
+    const loadProductsByArrival = () => {
+        getProducts('createdAt').then(data => {
+            console.log(data);
+            if (data.error) {
+                setError(data.error);
+            } else {
+                setProductsByArrival(data);
             }
         });
     };
@@ -41,7 +64,9 @@ const Shop = () => {
             }
         });
     };
-
+    const handleChange = name => event => {
+        setData({ ...data, [name]: event.target.value, searched: false });
+    };
     const loadMore = () => {
         let toSkip = skip + limit;
         // console.log(newFilters);
@@ -66,10 +91,26 @@ const Shop = () => {
             )
         );
     };
+    const handleToggle = c => () => {
+        // return the first index or -1
+        const currentCategoryId = checked.indexOf(c);
+        const newCheckedCategoryId = [...checked];
+        // if currently checked was not already in checked state > push
+        // else pull/take off
+        if (currentCategoryId === -1) {
+            newCheckedCategoryId.push(c);
+        } else {
+            newCheckedCategoryId.splice(currentCategoryId, 1);
+        }
+        // console.log(newCheckedCategoryId);
+        setCheked(newCheckedCategoryId);
+        handleFilters(newCheckedCategoryId);
+    };
 
     useEffect(() => {
         init();
         loadFilteredResults(skip, limit, myFilters.filters);
+        loadProductsByArrival();
     }, []);
 
     const handleFilters = (filters, filterBy) => {
@@ -98,34 +139,88 @@ const Shop = () => {
     };
 
     return (
-        <Layout
-            title="Shop Page"
-            description="Search and buy books of your intrests"
-            className="container-fluid">
-                <div className="row">
-                <div className="col-4">
-                    <h4>Filter by categories</h4>
-                    <Checkbox categories={categories} handleFilters={filters => handleFilters(filters, "category")}/>
-                
-                    <h4>Filter by Price Range</h4>
-                    <RadioBox prices={prices} handleFilters={filters => handleFilters(filters, "price")}/>
-                
-                </div>
-
-                <div className="col-8">
-                    <h2 className="mb-4">Products</h2>
-                    <div className="row">
-                        {filteredResults.map((product, i) => (
-                               <div key={i} className="col-4 mb-3">
-                                    <Card product={product} />
-                                </div>
+        
+<Layout>
+	<SearchBar Categories={categories} handleFilters={filters => handleFilters(filters, "category")} />
+	{/* <section class="product spad"> */}
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-3 col-md-5">
+					<div class="sidebar">
+						<div class="sidebar__item">
+							<h4>Department</h4>
+							<ul style={{marginLeft: "50px"}}>
+                            {categories.map((c, i) => (
+								<li key={i}>
+									<input onChange={handleToggle(c._id)} value={checked.indexOf(c._id === -1)} type="checkbox" className="form-check-input"/>
+									<label className="form-check-label">{c.name}</label>
+								</li>
                             ))}
+							</ul>
+						</div>
+						<div class="sidebar__item">
+							<h4>Select Price Range</h4>
+							<RadioBox prices={prices} handleFilters={filters => handleFilters(filters, "price")}/>
+						</div>
+						<div class="sidebar__item">
+							<div class="latest-product__text">
+								<h4>Latest Products</h4>
+								<div class="latest-product__slider owl-carousel">
+									<div class="latest-prdouct__slider__item">
+                                        {productsByArrival.map((product, i) => (
+                                            <a href="#" className="latest-product__item">
+                                                <div className="latest-product__item__pic">
+                                                    <ShowImage item={product} url="product" />
+                                                </div>
+                                                <div className="latest-product__item__text">
+                                                    <h6>{product.name}</h6>
+                                                    <span>$ {product.price}</span>
+                                                </div>
+                                            </a>
+                                        ))}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                    <hr/>
-                    {loadMoreButton()}
                 </div>
-            </div> 
-        </Layout>
+				<div class="col-lg-9 col-md-7">
+					<div class="row">
+					{filteredResults.map((product, i) => (       
+                    <div key={i} className="col-4 mb-3">
+                        <Card product={product} />
+                    </div>
+                ))}
+						
+					</div>
+			<hr/>
+            {loadMoreButton()}
+				</div>
+			</div>
+		</div>
+	{/* </section> */}
+	{/* <SearchBar Categories={categories} handleFilters={filters => handleFilters(filters, "category")} />
+	<div className="row">
+		<div className="col-4">
+			<h4>Filter by categories</h4>
+			<Checkbox categories={categories} handleFilters={filters => handleFilters(filters, "category")}/>
+			<h4>Filter by Price Range</h4>
+			<RadioBox prices={prices} handleFilters={filters => handleFilters(filters, "price")}/>
+		</div>
+		<div className="col-8">
+			<h2 className="mb-4">Products</h2>
+			<div className="row">
+                {filteredResults.map((product, i) => (       
+                    <div key={i} className="col-4 mb-3">
+                        <Card product={product} />
+                    </div>
+                ))}
+			</div>
+			<hr/>
+            {loadMoreButton()}
+		</div>
+	</div> */}
+</Layout>
     );
 };
 
