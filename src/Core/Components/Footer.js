@@ -13,7 +13,7 @@ const Footer=()=>{
                     <div class="footer__about">
                         <div class="footer__about__logo">
                             <Link to="/">
-                                <img src="img/logo.jpg" alt="" style={{height:"50px", width:"119px"}} />
+                                <img src="img/logo.svg" alt="" style={{height:"60px", width:"200px"}} />
                             </Link>
                         </div>
                         <ul>
