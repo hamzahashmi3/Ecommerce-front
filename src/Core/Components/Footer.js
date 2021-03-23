@@ -13,14 +13,14 @@ const Footer=()=>{
                     <div class="footer__about">
                         <div class="footer__about__logo">
                             <Link to="/">
-                                <img src="img/logo.svg" alt="" style={{height:"60px", width:"200px"}} />
+                                <img src="img/logo3.svg" alt="" style={{height:"60px", width:"200px"}} />
                             </Link>
                         </div>
                         <ul>
                             <li>Address: 81, Commercial Umar Block, Sector B, Bahria Town Lahore.</li>
                             <li>Phone: +92301 7111141</li>
                             <li>Email: 
-                                <Link to="#" class="__cf_email__" data-cfemail="8ee6ebe2e2e1ceede1e2e1fce2e7eca0ede1e3">salman@gmail.com </Link>
+                                <a href="https://mail.google.com/mail/u/0/#inbox" class="__cf_email__" data-cfemail="dbb3beb7b7b49bb8b4b7b4a9b7b2b9f5b8b4b6">salmanlobby3@gmail.com </a>
                             </li>
                         </ul>
                     </div>

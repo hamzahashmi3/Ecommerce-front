@@ -106,7 +106,7 @@ const CartProducts = ({
                     <h5 className="pt-1">{product.name}</h5>
                 </td>
                 <td className="shoping__cart__price">
-                    $ {product.price}
+                    Rs {product.price}
                 </td>
                 <td className="shoping__cart__quantity">
                     <div className="quantity">

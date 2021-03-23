@@ -105,7 +105,7 @@ const Card = ({
             <span>
               <div class="featured__item__text">
                   <h6><a>{product.name}</a></h6>
-                  <h5>$ {product.price}</h5>
+                  <h5>Rs {product.price}</h5>
               </div>
             </span>
         {/* </div> */}

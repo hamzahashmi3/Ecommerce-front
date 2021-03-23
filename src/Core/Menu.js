@@ -1,11 +1,12 @@
-import React, {Fragment} from 'react';
+import React, {Fragment,useState} from 'react';
 import { Link, withRouter } from "react-router-dom";
 import {signout, isAuthenticated} from '../Auth/Index';
 import { itemTotal } from "./CartHelpers";
+import './menu.css';
 
 const isActive = (history, path) => {
     if (history.location.pathname === path) {
-        return { color: "#7fad39" };
+        return { color: "#f18b04" };
     } else {
         return { color: "#252525" };
     }
@@ -13,6 +14,12 @@ const isActive = (history, path) => {
 
 
 function Menu({history}) {
+    const [click, setClick] = useState(false);
+
+    const handleClick = () =>{
+        setClick(!click);
+
+    }
     return (
         <div>
             
@@ -27,9 +34,9 @@ function Menu({history}) {
                                         <ul>
                                             <li>
                                                 <i class="fa fa-envelope"></i>
-                                                <Link to="#" class="__cf_email__" data-cfemail="dbb3beb7b7b49bb8b4b7b4a9b7b2b9f5b8b4b6">[email&#160;protected]</Link>
+                                                <a href="https://mail.google.com/mail/u/0/#inbox" class="__cf_email__" data-cfemail="dbb3beb7b7b49bb8b4b7b4a9b7b2b9f5b8b4b6">salmanlobby3@gmail.com </a>
                                             </li>
-                                            <li>Free Shipping for all Order of $99</li>
+                                            <li>providing quility is our one and only approach</li>
                                         </ul>
                                     </div>
                                 </div>
@@ -87,40 +94,40 @@ function Menu({history}) {
                             <div class="col-lg-3">
                                 <div class="header__logo">
                                     <Link to="/">
-                                        <img src="img/logo.svg" alt="" style={{height:"60px", width:"200px"}} />
+                                        <img src="img/logo3.svg" alt="" style={{height:"60px", width:"200px"}}/>
                                     </Link>
                                 </div>
                             </div>
                             <div class="col-lg-6">
-                                <nav class="header__menu">
-                                    <ul>
-                                        <li class="active">
-                                            <Link to="/"  style={isActive(history, "/")}>HOME</Link>
+                            <nav className="navbar">
+                                <div className="nav-container">
+                                    <ul className={click ? "nav-menu active" : "nav-menu"}>
+                                        <li className="nav-item">
+                                            <Link exact to="/"    className="nav-links" style={isActive(history, "/")}> Home </Link>
                                         </li>
-                                        <li>
-                                            <Link to="/shop" style={isActive(history, "/shop")}>Shop</Link>
+                                        <li className="nav-item">
+                                            <Link exact to="/shop"  activeClassName="active"  className="nav-links" style={isActive(history, "/shop")}>Shop</Link>
                                         </li>
                                         {isAuthenticated() && isAuthenticated().user.role === 0 && (
+                                            
                                             <li className="nav-item">
-                                                <Link to="/user/dashboard" className="nav-link" style={isActive(history, "/user/dashboard")}>
-                                                    Dashboard
-                                                </Link>
-                                            </li>)}
-
-                                        {isAuthenticated() && isAuthenticated().user.role === 1 && (
+                                                <Link exact to="/user/dashboard"  activeClassName="active"  className="nav-links" style={isActive(history, "/user/dashboard")}>Dashboard</Link>
+                                            </li>
+                                            )}
+                                            {isAuthenticated() && isAuthenticated().user.role === 1 && (
                                             <li className="nav-item">
-                                                <Link to="/admin/dashboard" className="nav-link" style={isActive(history, "/admin/dashboard")}>
-                                                    Dashboard
-                                                </Link>
-                                            </li>)}
+                                                <Link exact to="/admin/dashboard"  activeClassName="active"  className="nav-links" style={isActive(history, "/admin/dashboard")}>Dashboard</Link>
+                                            </li>
+                                            )}
                                             {/* <li>
-                                            <Link to="#">Blog</Link>
-                                        </li> */}
-                                        <li>
-                                            <Link to="/contact">Contact</Link>
+                                                <Link to="#">Blog</Link>
+                                            </li> */}
+                                        <li className="nav-item">
+                                            <Link exact to="/contact"  activeClassName="active"  className="nav-links" style={isActive(history, "/contact")}> Contact </Link>
                                         </li>
                                     </ul>
-                                </nav>
+                                </div>
+                            </nav>
                             </div>
                             <div class="col-lg-3">
                                 <div class="header__cart">
@@ -143,8 +150,8 @@ function Menu({history}) {
                                 </div>
                             </div>
                         </div>
-                        <div class="humberger__open">
-                            <i class="fa fa-bars"></i>
+                        <div class="humberger__open" onClick={handleClick}>
+                            <i className={click ? "fa fa-times" : "fa fa-bars"}></i>
                         </div>
                     </div>
                 </header>
