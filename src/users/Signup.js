@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import Layout from '../Core/Layout';
-// import {API} from '../Config';
 import { signup } from '../Auth/Index';
 
 const Signup = () => {
@@ -13,29 +12,11 @@ const Signup = () => {
         success: false
     });
 
-    const { name, email, password, success, error } = values;
+    const { name, email, password, error, success } = values;
 
     const handleChange = name => event => {
         setValues({ ...values, error: false, [name]: event.target.value });
     };
-
-
-    // const signup = ( user )=>{
-    //     return fetch(`${API}/signup`,{
-    //         method: "POST",
-    //         headers: {
-    //             Accept: "application/json",
-    //             "Content-Type": "application/json",
-    //     },
-    //     body: JSON.stringify(user)
-    //     })
-    //     .then(res=>{
-    //         return res.json()
-    //     })
-    //     .catch(err=>{
-    //         console.log(err)
-    //     })
-    // }
 
 
     const clickSubmit = event => {
@@ -81,15 +62,6 @@ const Signup = () => {
                         <label className="float-left" for="exampleInputPassword1">Password</label>
                         <input type="password" className="form-control" id="exampleInputPassword1" placeholder="Enter Your Password" value={password} onChange={handleChange('password')}/>
                     </div>
-                    {/* <div className="form-group">
-                    <label className="float-left" for="exampleInputPassword2">Confirm Password</label>
-                    <input type="password" className="form-control" id="exampleInputPassword2" placeholder="Confirm Your Password"  />
-
-                    </div>
-                    <div className="form-group">
-                    <label className="float-left" for="exampleInputPhone1">Cell No</label>
-                    <input type="number" className="form-control" id="exampleInputPhone1" placeholder="Your Phone No" />
-                    </div> */}
                     <p className="">Already have an Account? <Link to="/signin" className="text-primary"> Login here</Link></p>
                     <button onClick={clickSubmit} className="btn btn-primary rounded-0" style={{background: "#7fad39", fontWeight:"bolder", border:"none"}}>Submit</button>
                 </form>
