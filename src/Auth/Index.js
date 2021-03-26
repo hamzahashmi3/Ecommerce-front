@@ -1,7 +1,7 @@
 import {API} from '../Config';
 
 export const signup = ( user )=>{
-        return fetch(`${API}/api/signup`,{
+        return fetch(`${API}/signup`,{
             method: "POST",
             headers: {
                 Accept: "application/json",
