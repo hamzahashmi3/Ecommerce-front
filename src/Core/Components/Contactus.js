@@ -51,7 +51,7 @@ const Contact=()=>{
                                 <span className="icon_mail_alt"></span>
                                 <h4>Email</h4>
                                 <p>
-                                    <a href="https://mail.google.com/mail/u/0/#inbox" class="__cf_email__" data-cfemail="dbb3beb7b7b49bb8b4b7b4a9b7b2b9f5b8b4b6">salmanlobby3@gmail.com </a>
+                                    <a href="https://mail.google.com/mail/u/0/#inbox" className="__cf_email__" data-cfemail="dbb3beb7b7b49bb8b4b7b4a9b7b2b9f5b8b4b6">salmanlobby3@gmail.com </a>
                                 </p>
                             </div>
                         </div>

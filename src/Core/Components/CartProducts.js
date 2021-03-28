@@ -22,7 +22,7 @@ const CartProducts = ({
     return (
       showViewProductButton && (
         <Link to={`/product/${product._id}`} className="mr-2">
-          <li><a><i class="fa fa-image" style={{color:"black"}}></i></a></li>
+          <li><a><i className="fa fa-image" style={{color:"black"}}></i></a></li>
         </Link>
       )
     );
@@ -41,7 +41,7 @@ const CartProducts = ({
   const showAddToCartBtn = showAddToCartButton => {
     return (
       showAddToCartButton && (
-        <li onClick={addToCart}><a><i class="fa fa-shopping-cart"></i></a></li>
+        <li onClick={addToCart}><a><i className="fa fa-shopping-cart"></i></a></li>
       )
     );
   };

@@ -155,7 +155,7 @@ const Home = () => {
                 </div>
                 <div className="row featured__filter">
                     {productsByArrival.map((product, i) => (
-                        <div class="col-lg-3 col-md-4 col-sm-6">
+                        <div className="col-lg-3 col-md-4 col-sm-6">
                             <Card product={product} />
                             </div>
                     ))}

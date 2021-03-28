@@ -142,12 +142,12 @@ const Shop = () => {
         
 <Layout>
 	<SearchBar Categories={categories} handleFilters={filters => handleFilters(filters, "category")} />
-	{/* <section class="product spad"> */}
-		<div class="container">
-			<div class="row">
-				<div class="col-lg-3 col-md-5">
-					<div class="sidebar">
-						<div class="sidebar__item">
+	{/* <section className="product spad"> */}
+		<div className="container">
+			<div className="row">
+				<div className="col-lg-3 col-md-5">
+					<div className="sidebar">
+						<div className="sidebar__item">
 							<h4>Department</h4>
 							<ul style={{marginLeft: "50px"}}>
                             {categories.map((c, i) => (
@@ -158,15 +158,15 @@ const Shop = () => {
                             ))}
 							</ul>
 						</div>
-						<div class="sidebar__item">
+						<div className="sidebar__item">
 							<h4>Select Price Range</h4>
 							<RadioBox prices={prices} handleFilters={filters => handleFilters(filters, "price")}/>
 						</div>
-						<div class="sidebar__item">
-							<div class="latest-product__text">
+						<div className="sidebar__item">
+							<div className="latest-product__text">
 								<h4>Latest Products</h4>
-								<div class="latest-product__slider owl-carousel">
-									<div class="latest-prdouct__slider__item">
+								<div className="latest-product__slider owl-carousel">
+									<div className="latest-prdouct__slider__item">
                                         {productsByArrival.map((product, i) => (
                                             <a href="#" className="latest-product__item">
                                                 <div className="latest-product__item__pic">
@@ -184,8 +184,8 @@ const Shop = () => {
                         </div>
                     </div>
                 </div>
-				<div class="col-lg-9 col-md-7">
-					<div class="row">
+				<div className="col-lg-9 col-md-7">
+					<div className="row">
 					{filteredResults.map((product, i) => (       
                     <div key={i} className="col-4 mb-3">
                         <Card product={product} />

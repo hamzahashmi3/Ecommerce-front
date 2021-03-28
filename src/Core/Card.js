@@ -21,7 +21,7 @@ const Card = ({
     return (
       showViewProductButton && (
         <Link to={`/product/${product._id}`} className="mr-2">
-          <li><a><i class="fa fa-image" style={{color:"black"}}></i></a></li>
+          <li><a><i className="fa fa-image" style={{color:"black"}}></i></a></li>
         </Link>
       )
     );
@@ -40,7 +40,7 @@ const Card = ({
   const showAddToCartBtn = showAddToCartButton => {
     return (
       showAddToCartButton && (
-        <li onClick={addToCart}><a><i class="fa fa-shopping-cart"></i></a></li>
+        <li onClick={addToCart}><a><i className="fa fa-shopping-cart"></i></a></li>
       )
     );
   };
@@ -82,19 +82,19 @@ const Card = ({
         <li><a  onClick={() => {
           removeItem(product._id);
           setRun(!run); // run useEffect in parent Cart
-        }}><i class="fa fa-remove" style={{color:"black"}}></i></a></li>
+        }}><i className="fa fa-remove" style={{color:"black"}}></i></a></li>
       )
     );
   };
   return (
 
-    // <div class="col-lg-3 col-md-4 col-sm-6">
-        <div class="featured__item">
-            <div class="featured__item__pic set-bg" data-setbg="">
+    // <div className="col-lg-3 col-md-4 col-sm-6">
+        <div className="featured__item">
+            <div className="featured__item__pic set-bg" data-setbg="">
               {shouldRedirect(redirect)}
               <ShowImage item={product} url="product" />
-                <ul class="featured__item__pic__hover">
-                    <li><a><i class="fa fa-heart"></i></a></li>
+                <ul className="featured__item__pic__hover">
+                    <li><a><i className="fa fa-heart"></i></a></li>
                     {showViewButton(showViewProductButton)}
                     {showAddToCartBtn(showAddToCartButton)}
                     {showRemoveButton(showRemoveProductButton)}
@@ -103,7 +103,7 @@ const Card = ({
             </div>
             <span>{showStock(product.quantity)}</span>
             <span>
-              <div class="featured__item__text">
+              <div className="featured__item__text">
                   <h6><a>{product.name}</a></h6>
                   <h5>Rs {product.price}</h5>
               </div>

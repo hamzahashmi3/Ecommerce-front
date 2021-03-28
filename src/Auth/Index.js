@@ -1,21 +1,48 @@
 import {API} from '../Config';
 
-export const signup = ( user )=>{
-        return fetch(`${API}/signup`,{
-            method: "POST",
-            headers: {
-                Accept: "application/json",
-                "Content-Type": "application/json",
-        },
-        body: JSON.stringify(user)
-        })
-        .then(res=>{
-            return res.json()
-        })
-        .catch(err=>{
-            console.log(err)
-        })
+// export const signup = ( user )=>{
+//         return fetch(`${API}/signup`,{
+//             method: "POST",
+//             headers: {
+//                 Accept: "application/json",
+//                 "Content-Type": "application/json",
+//         },
+//         body: JSON.stringify(user)
+//         })
+//         .then(res=>{
+//             return res.json()
+//         })
+//         .catch(err=>{
+//             console.log(err)
+//         })
+//     }
+
+    export const signup = ({ name, email, password }) => {
+        return new Promise((resolve, reject) => {
+          fetch(`${API}/signup`,
+            {
+                method: 'POST',
+                headers: {
+                    Accept:'application/json',
+                    'Content-Type' : 'application/json'
+                },
+                body: JSON.stringify({ name, email, password })
+            })
+            .then(response => response.json())
+            .then(jsonData => resolve(jsonData))
+            .catch(err => resolve({error: `something went wrong err : ${err}`}));
+      })
     }
+    
+    /*
+    signup(user).then(data => {
+      if (data.error) {
+        // handle error case 
+      } else {
+        // handle success case
+      }
+    })
+    */
 
     export const signin = ( user )=>{
         return fetch(`${API}/signin`,{
