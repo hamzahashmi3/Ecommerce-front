@@ -106,24 +106,24 @@ function Menu({history}) {
                                             <Link exact to="/"    className="nav-links" style={isActive(history, "/")}> Home </Link>
                                         </li>
                                         <li className="nav-item">
-                                            <Link exact to="/shop"  activeClassName="active"  className="nav-links" style={isActive(history, "/shop")}>Shop</Link>
+                                            <Link exact to="/shop"  activeclassname="active"  className="nav-links" style={isActive(history, "/shop")}>Shop</Link>
                                         </li>
                                         {isAuthenticated() && isAuthenticated().user.role === 0 && (
                                             
                                             <li className="nav-item">
-                                                <Link exact to="/user/dashboard"  activeClassName="active"  className="nav-links" style={isActive(history, "/user/dashboard")}>Dashboard</Link>
+                                                <Link exact to="/user/dashboard"  activeclassname="active"  className="nav-links" style={isActive(history, "/user/dashboard")}>Dashboard</Link>
                                             </li>
                                             )}
                                             {isAuthenticated() && isAuthenticated().user.role === 1 && (
                                             <li className="nav-item">
-                                                <Link exact to="/admin/dashboard"  activeClassName="active"  className="nav-links" style={isActive(history, "/admin/dashboard")}>Dashboard</Link>
+                                                <Link exact to="/admin/dashboard"  activeclassname="active"  className="nav-links" style={isActive(history, "/admin/dashboard")}>Dashboard</Link>
                                             </li>
                                             )}
                                             {/* <li>
                                                 <Link to="#">Blog</Link>
                                             </li> */}
                                         <li className="nav-item">
-                                            <Link exact to="/contact"  activeClassName="active"  className="nav-links" style={isActive(history, "/contact")}> Contact </Link>
+                                            <Link exact to="/contact"  activeclassname="active"  className="nav-links" style={isActive(history, "/contact")}> Contact </Link>
                                         </li>
                                     </ul>
                                 </div>
